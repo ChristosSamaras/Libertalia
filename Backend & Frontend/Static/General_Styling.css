@@ -1,0 +1,236 @@
+/* Reset default styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Main Layout */
+body {
+    display: flex; /* Enable flexbox layout */
+    flex-direction: row; /* Arrange child elements horizontally */
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box;
+}
+
+/* Column Styles */
+.left-column,
+.center-column,
+.right-column {
+    flex: 1; /* Make columns equally sized */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Enable scrolling for individual columns if content overflows */
+}
+
+/* Left Column */
+.left-column {
+    background-color: #ff914d; /* Orange background */
+    color: white;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sidebar-logo {
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin: 10px 0;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #ff7700;
+    border-radius: 5px;
+}
+
+.sidebar-nav a:hover {
+    background-color: #cc6200;
+}
+
+/* Center Column */
+.center-column {
+    background-color: #fff; /* White background */
+    flex-grow: 2; /* Center column is wider */
+    overflow-y: auto; /* Scrollable if content overflows */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.post {
+    background: white;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-content {
+    margin-top: 10px;
+}
+
+.post-reactions {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.reaction-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff914d;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #cc6200;
+}
+
+/* Right Column */
+.right-column {
+    background-color: #ff914d;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.hashtag-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.hashtag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hashtag-item {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.add-hashtag {
+    margin-top: 10px;
+    background-color:  #ff914d;
+    padding: 10px; 
+}
+
+input[type="text"] {
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #ff914d;
+}
+.add-hashtag button {
+    padding: 5px 10px; /* Smaller padding for the button */
+    font-size: 0.9rem; /* Slightly smaller text size */
+    border-radius: 3px; /* Optional: make the button more compact */
+    background-color: #ff7700; /* Adjust background for better contrast if needed */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-hashtag button:hover {
+    background-color: #a65400; /* Darker background on hover */
+}
+
+/* Comment area modification */
+.comment-form {
+    margin-left: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between textarea and button  */
+}
+.comment-form textarea {
+    width: 50%; /* Make the textarea take full width of its container */
+    min-height: 100px; /* Set a minimum height */
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ff7700; /* Border color matching theme */
+    border-radius: 8px;
+    background-color: #f9f9f9; /* Light background color */
+    color: #333; /* Text color */
+    transition: border-color 0.3s ease; /* Smooth transition on focus */
+    resize: none; /* Remove the resize handle */
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #cc6200; /* Border color when focused */
+}
+
+.comment-form button {
+    width: 52.5%; /* Make button occupy half the width */
+    padding: 10px;
+    font-size: 1rem; /* Normal text size */
+    background-color: #ff7700;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Space between the textarea and button */
+}
+
+.comment-form button:hover {
+    background-color: #cc6200; /* Darken button color on hover */
+}
+
+
+
+
