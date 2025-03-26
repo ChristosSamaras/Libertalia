@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='General_Styling.css') }}">
+</head>
+<body>
+    <div class="left-column">
+        <div class="sidebar-header">
+            <h1 class="sidebar-title"></h1>
+            <img src="{{ url_for('static', filename='LIBERTALIAhorn1.png') }}" alt="Logo" class="sidebar-logo">
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#">Home Page</a></li>
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="/logout">Log Out</a></li> <!-- Added Log Out Button -->
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Center Column -->
+    <div class="center-column">
+        <h1>Truth in every byte</h1>
+
+        <!-- Profile Info Section -->
+        {% if session['fullname'] %}
+            <div class="profile-info">
+                {% if session['Sex'] == 'Male' %}
+                    <img src="{{ url_for('static', filename='male.png') }}" alt="Profile Photo" class="profile-pic">
+                {% elif session['Sex'] == 'Female' %}
+                    <img src="{{ url_for('static', filename='female.png') }}" alt="Profile Photo" class="profile-pic">
+                {% elif session['Sex'] == 'prefer not to define' %}
+                    <img src="{{ url_for('static', filename='LIBERTALIAhorn1.png') }}" alt="Profile Photo" class="profile-pic">
+                {% else %}
+                    <img src="default.png" alt="Profile Photo" class="profile-pic"> <!-- Default fallback image -->
+                {% endif %}
+                <span class="profile-name">{{ session['fullname'] }}</span>
+            </div>
+        {% endif %}
+
+        <!-- Journalist Options -->
+        {% if session['is_journalist'] %}
+        <form action="/add_post" method="GET">
+            <button type="submit" class="button">Create Post</button>
+        </form>
+        {% endif %}
+
+        <hr>
+        {% if post %}
+            <h2></h2>
+            {% for p in post %}
+                <div class="post">
+                    <div class="profile-info">
+                        <!-- Avatar Image with Conditional Logic -->
+                        {% if p.Sex == 'Male' %}
+                            <img src="{{ url_for('static', filename='male.png') }}" alt="Avatar of {{ p.Fullname }}" class="profile-pic">
+                        {% elif p.Sex == 'Female' %}
+                            <img src="{{ url_for('static', filename='female.png') }}" alt="Avatar of {{ p.Fullname }}" class="profile-pic">
+                        {% elif p.Sex == 'prefer not to define' %}
+                            <img src="{{ url_for('static', filename='pnd.png') }}" alt="Avatar of {{ p.Fullname }}" class="profile-pic">
+                        {% else %}
+                            <img src="default.png" alt="Avatar of {{ p.Fullname }}" class="profile-pic"> <!-- Default fallback image -->
+                        {% endif %}
+
+                        <!-- Profile Details Section (Name and Post Date) -->
+                        <div class="profile-details">
+                            <div class="profile-name">{{ p.Fullname }}</div>
+                            <div class="post-date">{{ p.PostDate }}</div>
+                        </div>
+                    </div>
+
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        {% if reference %}
+                            {% for r in reference %}
+                                {% if r.JEmail == p.JEmail and r.Post_Date == p.PostDate %}
+                                     <p>#{{ r.Text }}</p>
+
+                                {% endif %}
+                            {% endfor %}
+                            <p>{{ p.Post_Text }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Post Image (only display if PostImage is not NULL or empty) -->
+                    {% if p.PostImage %}
+                        <img src="{{ p.PostImage }}" alt="Post Image" class="post-img">
+                    {% endif %}
+
+                    <!-- Like/Dislike Buttons -->
+                    <div class="post-reactions">
+                        
+                        <form action="/react" method="post" style="display: inline;">
+                            <input type="hidden" name="JEmail" value="{{ p.JEmail }}">
+                            <input type="hidden" name="Post_Date" value="{{ p.PostDate }}">
+                            <input type="hidden" name="Reaction_Type" value="1">
+                            <img src="{{ url_for('static', filename='like.png') }}" alt="Like" class="reaction-icon">
+                            {% if session['is_journalist'] != true %} 
+                                <button type="submit" class="like-button">Like</button>
+                            {% endif %}
+                        </form>
+                        
+
+                        <span>{{ p.NumLikes }} </span>
+                        
+                        
+                        <form action="/react" method="post" style="display: inline;">
+                            <input type="hidden" name="JEmail" value="{{ p.JEmail }}">
+                            <input type="hidden" name="Post_Date" value="{{ p.PostDate }}">
+                            <input type="hidden" name="Reaction_Type" value="0">
+                            <img src="{{ url_for('static', filename='dislike.png') }}" alt="Dislike" class="reaction-icon">
+                            {% if session['is_journalist'] != true %}
+                            <button type="submit" class="dislike-button">Dislike</button>
+                            {% endif %}
+                        </form>
+                       
+
+                        <span>{{ p.NumDislikes }} </span>
+
+                    </div>
+
+
+                    <!-- Comments list -->
+                    <div>
+                        <h3>Comments</h3>
+                        {% if comment %}
+                            {% for c in comment %}
+                                {% if c.JEmail == p.JEmail and c.Post_Date == p.PostDate %}
+                                    <div style="margin-left: 20px;">
+                                        <p>{{ c.Comment_Text }}</p>
+                                        <small>By: {{ c.Fullname }} | Date: {{ c.Comment_Date }}</small>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p style="margin-left: 20px;">No comments yet.</p>
+                        {% endif %}
+
+
+
+                        {% if session['is_journalist'] != true %}
+                    <!-- Add Comment -->
+                    <form action="/add_comment" method="post" class="comment-form">
+                        <textarea name="Comment_Text" placeholder="Add a comment..." required></textarea>
+                        <input type="hidden" name="JEmail" value="{{ p.JEmail }}">
+                        <input type="hidden" name="Post_Date" value="{{ p.PostDate }}">
+                        <button type="submit">Comment</button>
+                    </form>
+                        {% endif %}
+
+
+                    </div>
+                
+                </div>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>No posts available at the moment.</p>
+        {% endif %}
+
+        
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+        <div class="hashtag-section">
+            <h2 class="hashtag-title">#Where News Live#</h2>
+
+            <!-- Display Hashtags -->
+            {% if hashtag %}
+                <ul class="hashtag-list">
+                    {% for tag in hashtag %}
+                        <li class="hashtag-item">#{{ tag.Text }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hashtags available at the moment.</p>
+            {% endif %}
+
+            <!-- Add New Hashtag Form -->
+            <div class="add-hashtag">
+                <form action="/add_hashtag" method="POST">
+                    <input type="text" name="Text" placeholder="Add a hashtag" required>
+                    <button type="submit">Add </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

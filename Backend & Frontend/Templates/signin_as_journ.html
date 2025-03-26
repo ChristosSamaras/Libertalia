@@ -1,0 +1,38 @@
+<!-- Journalist Sign In Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in as Journalist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='authentication.css') }}"> <!-- Front-End Styling File -->
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Sign In Attributes -->
+        <div class="auth-left">
+            <h1>Sign in as Journalist</h1>
+            <form method="POST">
+                <label for="Email">Email:</label>
+                <input type="email" name="Email" id="Email" required>
+
+                <label for="Password">Password:</label>
+                <input type="password" name="Password" id="Password" required>
+
+                <button type="submit">Sign in</button>
+            </form>
+            <a href="/" class="back-to-home">Back to Home</a> <!-- Redirecting back to Welcome Page -->
+        </div>
+
+        <!-- Sign In Page Motivation Text -->
+        <div class="auth-right">
+            <h2>Empower your Voice! Jump into our Community!</h2>
+            <p>We are happy to have you back! Here is a quick reminder:</p>
+            <p>Our name derives from a pirate legend. Libertalia is a legendary pirate colony where its main principle was the equality and free will of its citizens. Our goal is to give you the opportunity to share ideas, news, and commentary on various current events seamlessly and directly.</p>
+            <p>Publish your raw opinion, the authentic news, your incorruptible commentary.</p>
+            <p>But please, do not forget to follow our community rules.</p>
+        </div>
+    </div>
+</body>
+</html>

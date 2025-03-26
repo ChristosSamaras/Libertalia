@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Create_Post_Styling.css') }}">
+</head>
+
+<body>
+    
+    <!-- Display Success or Error Message -->
+    {% if message %}
+    <div class="message">
+        <!-- <p>{{ message }}</p> -->
+        <script>
+        if ('{{ message }}' == 'Post created successfully! Rediracting...') {
+            setTimeout(function () {
+                window.location.href = '/homepage';
+            }, 1000); // 2-second delay
+        }
+        </script>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <!-- Left column with sidebar -->
+        <div class="left-column">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title"></h1>
+                <img src="{{ url_for('static', filename='LIBERTALIAhorn1.png') }}" alt="Logo" class="sidebar-logo">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#">Home Page</a></li>
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Center column -->
+        <div class="center-column">
+            <h1>Create a New Post</h1>
+
+            {% if message %}
+            <p>{{ message }}</p>
+            {% endif %}
+
+            <form method="POST">
+                <textarea name="Post_Text" id="Post_Text" rows="3" cols="40" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Right column -->
+        <div class="right-column">
+        </div>
+</body>
+</html>

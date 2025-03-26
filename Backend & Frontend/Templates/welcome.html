@@ -1,0 +1,41 @@
+<!-- Welcome Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup or Signin as Engager/Journalist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='welcome_style.css') }}"> <!-- Front-End Styling File -->
+</head>
+<body>
+    <div class="left-column">
+        <img src="{{ url_for('static', filename='LIBERTALIAhorn1.png') }}" alt="Libertalia Logo">
+    </div>
+
+    <div class="right-column">
+        <div class="columns-container">
+            <!-- Engager Section -->
+            <div class="engager-column">
+                <h2>Engager</h2>  
+                <div class="buttons-container">
+                    <div onclick="window.location.href='/signin_as_engager'">Sign In</div>
+                    <div onclick="window.location.href='/signup_as_engager'">Sign Up</div>
+                </div>
+            </div>
+            <div class="gray-line-column">
+                <div class="grey-line"></div>  
+            </div>
+
+            <!-- Journalist Section -->
+            <div class="journalist-column">
+                <h2>Journalist</h2>  
+                <div class="buttons-container">
+                    <div onclick="window.location.href='/signin_as_journalist'">Sign In</div>
+                    <div onclick="window.location.href='/signup_as_journalist'">Sign Up</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
